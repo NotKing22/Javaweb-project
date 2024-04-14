@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Conta - Academia Zenith</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+		background-color: rgb(79, 79, 79);
+    }
+	.header {
+	    background-color: #333;
+	    color: #fff;
+	    padding: 10px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: flex-end;
+	}
+	
+	.header h1 {
+	    margin: 0;
+	    margin-right: 10px; 
+	}
+	
+	.header img {
+	    border-radius: 50%;
+	    width: 40px;
+	    height: 40px;
+	}
+
+    .container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+		background-color: #1a1a1a;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .planos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+    .plano {
+        width: 200px;
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .plano img {
+        max-width: 100px;
+        margin-bottom: 10px;
+    }
+    .plano h3 {
+        color: #333;
+    }
+    .plano p {
+        color: #666;
+        margin-bottom: 10px;
+    }
+    .footer {
+        background-color: #333333;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+    }
+    .footer a {
+        color: #fff;
+        text-decoration: underline;
+    }
+    .footer a:hover {
+        color: #ccc;
+    }
+    .footer p {
+        margin: 5px 0;
+    }
+	.plans-container {
+	        display: flex;
+	        justify-content: space-around;
+	        flex-wrap: wrap;
+	    }
+	.plan-box {
+	    width: calc(25% - 20px);
+	    background-color: #333;
+	    padding: 20px;
+	    margin-bottom: 40px;
+	    border-radius: 10px;
+	    box-shadow: 0 4px 12px rgb(255, 255, 255);
+	    text-align: center;
+	}
+
+    .plan-box img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .plan-box h3 {
+        color: #ffcc00;
+        margin-top: 20px;
+    }
+    .plan-box p {
+        color: #ffffff;
+    }
+    .plan-box button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #ff6600;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .plan-box button:hover {
+        background-color: #e55a00;
+    }
+	.container h1 {
+		color: #ffcc00;
+		text-align: center;
+	}
+	.h1h1 h1 {
+		font-family: Luminari, fantasy;
+	}
+	.plano_ativo p {
+		font-family: Luminari, fantasy;
+		font-size: 1.3rem;
+	    color: rgb(0, 196, 0);
+	}
+	
+	.plano_inativo p {
+		font-family: Luminari, fantasy;
+		font-size: 1.3rem;
+	    color: rgb(255, 23, 23);
+	}
+	</style>
+</head>
+<body>
+
+<div class="header">
+	<h1>Olá, <span th:text="${username}" id="nome" name="nome"></span>!</h1>
+	<img class="img-profile rounded-circle" src="/img/undraw_profile.svg">
+</div>
+
+
+<div class="container">
+    <h1 class="h1h1">Meus Planos Contratados</h1>
+    <div class="planos">
+        <div class="plan-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9QytBpx18YJ_Ac7RLKJlMasWt5_rOVLxXDkFFpuG9BQ&amp;s" alt="Plano Mensal">
+            <h3>Plano Mensal</h3>
+            <p>add Descrição...</p>
+            <p>Validade: 1 Mês</p>
+			<div class="plano_ativo" th:if="${mensal == true}"> 
+				<p>	<span>Plano ativo</span></p>
+			</div>
+			<div class="plano_inativo" th:unless="${mensal == true}">
+			    <p>Plano Mensal não está ativo</p>
+			</div>
+        </div>
+        <div class="plan-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPyKmXulnKgfdf-6Ghgs4Ob_lJq5QRT2MJns0NdnJWVg&amp;s" alt="Plano Trimestral">
+            <h3>Plano Trimensal</h3>
+            <p>add Descrição...</p>
+            <p>Validade: 3 Meses</p>
+			<div class="plano_ativo" th:if="${trimensal == true}"> 
+				<p>	<span>Plano ativo</span></p>
+			</div>
+			<div class="plano_inativo" th:unless="${trimensal != null}">
+			    <p>Plano Trimensal não está ativo</p>
+			</div>
+        </div>
+        <div class="plan-box">
+            <img src="https://img.freepik.com/vetores-premium/coroa-de-pixel-art-para-ativos-de-jogo_735839-172.jpg" alt="Plano Semestral">
+            <h3>Plano Semestral</h3>
+            <p>add Descrição...</p>
+            <p>Validade: 6 Meses</p>
+			<div class="plano_ativo" th:if="${semestral == true}"> 
+				<p>	<span>Plano ativo</span></p>
+			</div>
+			<div class="plano_inativo" th:unless="${semestral != null}">
+			    <p>Plano Semestral não está ativo</p>
+			</div>
+        </div>
+        <div class="plan-box">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p3/5212727-vector-pixel-art-coroa-pixel-art-golden-coroa-pixel-art-royal-king-hat-vector-illustration-vetor.jpg" alt="Plano Anual">
+            <h3>Plano Anual</h3>
+            <p>add Descrição...</p>
+            <p>Validade: 12 Meses</p>
+			<div class="plano_ativo" th:if="${anual == true}"> 
+				<p>	<span>Plano ativo</span></p>
+			</div>
+			<div class="plano_inativo" th:unless="${anual != null}">
+			    <p>Plano Anual não está ativo</p>
+			</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <p>© 2024 Academia Zenith. Todos os direitos reservados.</p>
+    <p>Desenvolvido por Matheus de Jesus - <a href="https://github.com/NotKing22">GitHub</a></p>
+</div>
+
+</body>
+</html>

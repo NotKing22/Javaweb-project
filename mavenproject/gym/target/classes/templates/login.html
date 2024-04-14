@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Academia Zenith</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url('https://cdn.pixabay.com/photo/2020/10/07/17/22/women-5635784_1280.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid #ccc; /* Adicionando borda com 1px de largura */
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-family: Luminari, fantasy;
+            color: rgb(255, 128, 0)
+        }
+        .form-input {
+            margin-bottom: 20px;
+        }
+        .form-input label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-input input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-action {
+            text-align: center;
+        }
+        .form-action button {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-action button:hover {
+            background-color: #0056b3;
+        }
+        .signup-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login <br> Academia Zenith</h2>
+    <form action="/entrar" method="post">
+        <div class="form-input">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="admin@gmail.com" required>
+        </div>
+        <div class="form-input">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="senha" placeholder="admin" required>
+        </div>
+        <div class="form-action">
+            <button type="submit">Entrar</button>
+        </div>
+        <!-- Mensagem de senha incorreta -->
+		<div th:if="${erroLogin}" class="error-message" th:text="${erroLogin}"></div>
+
+    </form>
+    <a href="/formulario-cadastro" class="signup-link">Não tem uma conta? Cadastre-se</a>
+</div>
+
+</body>
+</html>

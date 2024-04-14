@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia Zenith</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #1a1a1a;
+        color: #cccccc;
+    }
+	.nav-bar {
+	    background-color: #333333;
+	    color: white;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center; 
+	    padding: 10px 50px;
+	}
+	.nav-bar a {
+	    color: #f2f2f2;
+	    text-decoration: none;
+	    padding: 10px;
+	    margin: 0 5px;
+	}
+    .nav-bar a:hover {
+        background-color: #505050;
+        border-radius: 5px;
+    }
+    .header {
+        padding: 40px 0;
+        text-align: center;
+        background-color: #202020;
+        color: #ffffff;
+        font-family: Luminari, fantasy;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        animation: changeColor 5s infinite alternate;
+    }
+    .main-image {
+        width: 100%;
+        height: 100vh;
+        background-image: url(https://www.designi.com.br/images/preview/10394528.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+    .content {
+        padding: 20px;
+        text-align: center;
+    }
+    .section {
+        margin: 40px 0;
+    }
+    .section h2 {
+        color: #ffcc00;
+        font-size: 2rem;
+    }
+    .section p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    .footer {
+        background-color: #333333;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+	.footer a {
+		text-decoration: underline;
+		color: skyblue;
+	}
+    .btn, .signup-btn, .login-btn {
+        display: inline-block;
+        background-color: #ff6600;
+        color: #ffffff;
+        padding: 10px 20px;
+        margin: 20px 0;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .signup-btn {
+        background-color: rgb(198, 0, 0);
+    }
+    .login-btn {
+        background-color: rgb(64, 128, 128);
+    }
+    .btn:hover, .signup-btn:hover, .login-btn:hover {
+        opacity: 0.85;
+    }
+    .line-divider {
+        width: 100%;
+        height: 2px;
+        background-color: red;
+    }
+    .plans-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+	.plan-box {
+	    width: calc(25% - 20px);
+	    background-color: #333;
+	    padding: 20px;
+	    margin-bottom: 40px;
+	    border-radius: 10px;
+	    box-shadow: 0 4px 12px rgb(255, 255, 255);
+	    text-align: center;
+	}
+
+    .plan-box img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .plan-box h3 {
+        color: #ffcc00;
+        margin-top: 20px;
+    }
+    .plan-box p {
+        color: #ffffff;
+    }
+    .plan-box button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #ff6600;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .plan-box button:hover {
+        background-color: #e55a00;
+    }
+
+	    @keyframes changeColor {
+        0% { color: #ff6600; }
+        50% { color: rgb(255, 255, 0); }
+        100% { color: rgb(174, 70, 0); }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Academia Zenith</h1>
+</div>
+
+<div class="line-divider"></div>
+
+<div class="nav-bar">
+    <div>
+        <a href="#">Home</a>
+        <a href="#">Sobre</a>
+        <a href="#">Serviços</a>
+        <a href="#">Contato</a>
+    </div>
+    <div>
+        <a href="/login" class="login-btn">Área do aluno</a>
+        <a href="/formulario-cadastro" class="signup-btn">Matricule-se</a>
+    </div>
+</div>
+
+<div class="main-image"></div>
+
+<div class="content">
+    <div class="section">
+        <h2>Sobre Nós</h2>
+        <p>Descubra um novo patamar de fitness com a Academia Zenith. Aqui, você encontrará uma combinação excepcional de tecnologia de ponta, instrutores altamente qualificados e uma comunidade apaixonada e motivadora. Nossa academia oferece uma variedade de equipamentos de última geração, projetados para atender às necessidades e objetivos individuais de cada membro. Seja qual for o seu nível de experiência ou objetivo de condicionamento físico, estamos aqui para ajudá-lo a alcançar e superar seus limites. Junte-se a nós na jornada rumo a uma vida mais saudável, ativa e vibrante na Academia Zenith.</p>
+        <a href="#" class="btn">Saiba Mais</a>
+    </div>
+    <div class="section">
+        <h2>Contato</h2>
+        <p>		
+		ntre em contato conosco hoje mesmo e dê o primeiro passo para a sua jornada fitness na Academia Zenith. Estamos ansiosos para recebê-lo em nossa família e ajudá-lo a alcançar seus objetivos de saúde e bem-estar. Não hesite em nos ligar, enviar um e-mail ou visitar pessoalmente nossa academia. Estamos aqui para apoiá-lo em cada etapa do caminho.</p>
+        <a href="#" class="btn">Entre em Contato</a>
+    </div>
+    
+    <div class="plans-container">
+        <div class="plan-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9QytBpx18YJ_Ac7RLKJlMasWt5_rOVLxXDkFFpuG9BQ&s" alt="Plano Mensal">
+            <h3>Mensal</h3>
+            <p>R$ 59,90</p>
+            <button>Assinar plano</button>
+        </div>
+        <div class="plan-box">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPyKmXulnKgfdf-6Ghgs4Ob_lJq5QRT2MJns0NdnJWVg&s" alt="Plano Trimestral">
+            <h3>Trimestral</h3>
+            <p>R$ 159,99</p>
+            <button>Assinar plano</button>
+        </div>
+        <div class="plan-box">
+            <img src="https://img.freepik.com/vetores-premium/coroa-de-pixel-art-para-ativos-de-jogo_735839-172.jpg" alt="Plano Semestral">
+            <h3>Semestral</h3>
+            <p>R$ 319,99</p>
+            <button>Assinar plano</button>
+        </div>
+        <div class="plan-box">
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p3/5212727-vector-pixel-art-coroa-pixel-art-golden-coroa-pixel-art-royal-king-hat-vector-illustration-vetor.jpg" alt="Plano Anual">
+            <h3>Anual</h3>
+            <p>R$ 679,99</p>
+            <button>Assinar plano</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© 2024 Academia Zenith. Todos os direitos reservados.</p>
+	<br>
+	<p>Desenvolvido por Matheus de Jesus</p>
+	<a href="https://github.com/NotKing22">Visualizar GitHub</a>
+</div>
+
+</body>
+</html>
