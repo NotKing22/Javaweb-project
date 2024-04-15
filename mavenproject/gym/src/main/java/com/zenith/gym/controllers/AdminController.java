@@ -16,7 +16,6 @@ import com.zenith.gym.models.repositories.AdminRepository;
 import com.zenith.gym.models.repositories.LoginAdmRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -83,13 +82,15 @@ public class AdminController {
 	}
 	
 	@PostMapping("/administradores/salvar")
-	public String update(Admin_db login, AdminModel info) {
-
-			loginAdmRepo.save(login);
-			adminRepo.cadastrarAdm(info.getRG(), info.getNome(), info.getEndereço(), salario);
+	public String update(HttpServletRequest request, Admin_db login, AdminModel info) {
+		Integer ID = Integer.parseInt(request.getParameter("id"));
 		
+			loginAdmRepo.updateLogin(ID, login.getEmail(), login.getSenha());
+			adminRepo.updateAdm(ID, info.getRG(), info.getNome(), info.getEndereço(), salario);
+			
 			return "redirect:/administradores/ver";
 		}
+
 	
 	@GetMapping("/administradores/dashboard")
 	public String dashboard() {
@@ -97,22 +98,3 @@ public class AdminController {
 		}
 	
 	}
-
-
-
-
-
-
-
-
-
-
-
-/*@PostMapping("/administradores/{id}/excluir")
-public String excluir(@PathVariable int id) {
-	loginAdmRepo.deleteById(id);
-	adminRepo.deleteById(id);
-	
-	return "redirect:/administradores/ver";
-}*/
-	

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zenith.gym.logins.Admin_db;
 import com.zenith.gym.logins.Login_db;
@@ -45,6 +46,7 @@ public class RegisterController {
     	System.out.println("login " + login.getEmail() + " senha " + login.getSenha());
     	
         boolean credenciaisCorretas = validarCredenciais(login.getEmail(), login.getSenha());
+        
         boolean admin = false;
         if (credenciaisCorretas) {
             session.setAttribute("usuarioAutenticado", true);
@@ -55,6 +57,8 @@ public class RegisterController {
             	model.addAttribute("trimensal", true);
             	model.addAttribute("semestral", true);
             	model.addAttribute("anual", true);
+            	model.addAttribute("is_admin", true);
+            	model.addAttribute("nome", "Administrador");
             	admin = true;
             	System.out.println("usuario reconhecido como administrador.");
             }
@@ -76,11 +80,14 @@ public class RegisterController {
 	        		default:
 	        			model.addAttribute("sem_plano", true);
 	            }
+	            String[] nome_completo = plansRepository.findNameByEmail(login.getEmail()).split(" ");
+	            String primeiro_nome = nome_completo[0];
+	            model.addAttribute("nome", primeiro_nome);
             }
             return "entrar";
         } else {
         	System.out.println("recusado");
-            model.addAttribute("erro", "Credenciais inválidas. Por favor, tente novamente.");
+            model.addAttribute("erroLogin", "* Credenciais inválidas. Por favor, tente novamente.");
             return "login";
         }
     }
@@ -97,7 +104,7 @@ public class RegisterController {
     
     @Transactional
     @PostMapping("/cadastrar")
-    public String cadastro(Model model, UserModel userModel, Login_db login, UserPlans plans) {
+    public String cadastro(Model model, UserModel userModel, Login_db login, UserPlans plans, RedirectAttributes redirectAttributes) {
     	if (!loginRepository.existsByEmail(login.getEmail())) {
     		userModel.setStatus_academia("Ativo");
     		String data = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyddMM"));
@@ -119,7 +126,7 @@ public class RegisterController {
 						    			userModel.getPlano_academia());
 	    	return "redirect:/login"; 
     	} else {
-    		 model.addAttribute("erro_email", "E-mail já cadastrado. Por favor, utilize outro e-mail ou autentique-se.");
+    		redirectAttributes.addFlashAttribute("erroEmail", "* E-mail já cadastrado. Por favor, autentique-se.");
     		return "redirect:/formulario-cadastro";
     	}
     }

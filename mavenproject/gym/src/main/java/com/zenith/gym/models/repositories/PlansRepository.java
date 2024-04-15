@@ -23,4 +23,7 @@ public interface PlansRepository extends JpaRepository<UserPlans, Integer> {
 	@Query("SELECT p.plano_academia FROM UserPlans p WHERE p.email = :email")
 	String findPlanoByEmail(@Param("email") String email);
 	
+	@Query("SELECT p.nome FROM UserPlans p WHERE p.email = :email")
+	String findNameByEmail(@Param("email") String email);
+	
 }

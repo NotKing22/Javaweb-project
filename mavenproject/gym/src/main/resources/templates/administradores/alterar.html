@@ -372,7 +372,7 @@
             <!-- Footer provavelmente dados nulos -->
 			<form method="POST" action="/administradores/salvar" onsubmit="return confirm('Deseja realmente confirmar o envio?')">
 			    
-				<input type="hidden" th:value="${id}" id="ID"/> 
+					<input type="hidden" th:value="${id}" id="id" name="id"/>
 				
 				<div class="form-group">
 			        <label for="username"><strong>Nome de usuário</strong></label>
