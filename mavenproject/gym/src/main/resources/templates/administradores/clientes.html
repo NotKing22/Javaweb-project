@@ -389,8 +389,8 @@
 				    <td th:text="${userModel.status_academia}">status</td>
 					
 			        <td>
-			            <a href="#" class="btn btn-warning">Alterar</a>
-			            <a href="#" class="btn btn-danger">Excluir</a>
+						<a th:href="@{'/administradores/clientes/' + ${userModel.ID} + '/editar'}" class="btn btn-warning">Alterar</a>
+						<a th:href="@{'/administradores/clientes/' + ${userModel.ID} + '/excluir'}" class="btn btn-danger">Excluir</a>
 			        </td>
 			    </tr>
 			</table>

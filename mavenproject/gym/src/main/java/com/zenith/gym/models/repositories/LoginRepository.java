@@ -25,4 +25,9 @@ public interface LoginRepository extends JpaRepository<Login_db, Integer> {
     @Query(value = "INSERT INTO login_db(matricula, email, senha) VALUES (:matricula, :email, :senha)", nativeQuery = true)
     void cadastrarLogin(@Param("matricula") Integer matricula, @Param("email") String email, @Param("senha") String senha);
     
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE Login_db SET email = :email, senha = :senha WHERE matricula = :matricula", nativeQuery = true)
+    void updateLogin(@Param("matricula") Integer matricula, @Param("email") String email, @Param("senha") String senha);
+
 }

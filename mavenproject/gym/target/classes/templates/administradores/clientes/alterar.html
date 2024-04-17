@@ -231,7 +231,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="/img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="//img/undraw_profile_1.svg"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -324,7 +324,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Painel - Clientes</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Painel - Controle de clientes</h1>
                         <a href="/administradores/novo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Adicionar Administrador</a>
                     </div>
@@ -369,36 +369,73 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-			<table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
-				
-			    <tr>
-			        <th>Matrícula</th>
-			        <th>RG</th>
-					<th>Nome</th>
-					<th>Sexo</th>
-			        <th>Mensalidade</th>
-					<th>Planos</th>
-			    </tr>
-				<tr th:each="userModel : ${clientes}">
-				    <td th:text="${userModel.matricula}">matricula</td>
-				    <td th:text="${userModel.RG}">rg</td>
-				    <td th:text="${userModel.nome_completo}">nome</td>
-				    <td th:text="${userModel.sexo}">sexo</td>
-				    <td th:text="${userModel.plano_academia}">planos</td>
-				    <td th:text="${userModel.status_academia}">status</td>
-					
-			        <td>
-						<a th:href="@{'/administradores/clientes/' + ${userModel.ID} + '/editar'}" class="btn btn-warning">Alterar</a>
-						<a th:href="@{'/administradores/clientes/' + ${userModel.ID} + '/excluir'}" class="btn btn-danger">Excluir</a>
-			        </td>
-			    </tr>
-			</table>
+            <!-- Footer provavelmente dados nulos -->
+			<form method="POST" action="/administradores/clientes/salvar" onsubmit="return confirm('Deseja realmente confirmar o envio?')">
+				<div class="form-group">
+					<input type="hidden" th:value="${id}" id="id" name="id"/>
+					<input type="hidden" th:value="${email}" id="email" name="email"/>
+					<input type="hidden" th:value="${matricula}" id="matricula" name="matricula"/>
+				</div>
+								
+			    <div class="form-group">
+			        <label for="nome"><strong>Nome de usuário</strong></label>
+			        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome de usuário" 							th:value="${nome}" required>
+			    </div>
+			    <div class="form-group">
+			        <label for="rg"><strong>RG</strong></label>
+			        <input type="text" class="form-control" id="rg" name="RG" placeholder="RG: 000.000.000-00" 							maxlength="14" th:value="${rg}" required>
+			    </div>
+			    <div class="form-group">
+			        <label for="endereço"><strong>Endereço</strong></label>
+			        <input type="text" class="form-control" id="endereco" name="endereço" placeholder="Endereço" th:value="${endereco}" required>
+			    </div>
+			    
+			    <!-- Campos adicionais -->
+			    <div class="form-group">
+			        <label for="datanascimento"><strong>Data de Nascimento</strong></label>
+			        <input type="text" class="form-control" id="datanascimento" name="datanascimento" placeholder="Data de Nascimento" th:value="${datanascimento}" required>
+			    </div>
+			    <div class="form-group">
+					<label for="sexo">Sexo</label>
+					<select id="sexo" name="sexo" required>
+						<option value="Masculino">Masculino</option>
+						<option value="Feminino">Feminino</option>
+						<option value="Outro">Outro</option>
+					</select>	       
+				    </div>
+			    <div class="form-group">
+					<label for="planoacademia">Plano de Academia:</label>
+					<select id="planoacademia" name="planoacademia" required>
+					    <option value="">Selecione</option>
+					    <option value="Mensal">Mensal (R$ 59,90)</option>
+					    <option value="Trimestral">Trimestral (R$ 159,99)</option>
+					    <option value="Semestral">Semestral (R$ 319,99)</option>
+					    <option value="Anual">Anual (R$ 679,99)</option>
+					</select>			   
+				 </div>
+			    <div class="form-group">
+					<label for="statusacademia">Status academia:</label>
+					<select id="statusacademia" name="statusacademia" required> 
+						<option value="">Selecione</option>
+						<option value="Ativo">Ativo</option>
+						<option value="Pendente">Pendente</option>
+						<option value="Inativo">Inativo</option>
+					</select>		       
+				    </div>
+				<div class="form-group">
+				    <label for="senha"><strong>Senha de acesso</strong></label>
+				    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha do usuário" th:value="${senha}" required>
+				</div>
+			    
+			    <button type="submit" class="btn btn-primary" style="background-color: rgb(240, 120, 0);">Alterar dados</button>
+			</form>
+
+
 			
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span> </span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>
