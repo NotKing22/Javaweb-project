@@ -1,5 +1,7 @@
 package com.zenith.gym.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,8 @@ import com.zenith.gym.logins.Admin_db;
 import com.zenith.gym.models.AdminModel;
 import com.zenith.gym.models.repositories.AdminRepository;
 import com.zenith.gym.models.repositories.LoginAdmRepository;
+import com.zenith.gym.models.repositories.PlansRepository;
+import com.zenith.gym.models.repositories.RegistrationsRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -24,6 +28,10 @@ public class AdminController {
 	private AdminRepository adminRepo; 
 	@Autowired
 	private LoginAdmRepository loginAdmRepo;
+	@Autowired
+	private RegistrationsRepository RegistrationRepo;
+	@Autowired
+	private PlansRepository plansRepo;
 	
 	int salario = 5000;
 	
@@ -51,6 +59,12 @@ public class AdminController {
 	public String criar(Admin_db login, AdminModel info) {
 			loginAdmRepo.save(login);
 			adminRepo.cadastrarAdm(info.getRG(), info.getNome(), info.getEndereço(), salario);
+			
+		/*	String data = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyddMM"));
+			String matricula = (data + info.getID()); 
+			RegistrationRepo.cadastrarUsuario(matricula, info.getRG(), info.getNome(), data, "adm", info.getEndereço(), "Todos", "Ativo");
+			plansRepo.cadastrarPlano(Integer.parseInt(matricula), info.getRG(), info.getNome(), login.getEmail(), "Todos");
+			*/
 			return "redirect:/administradores/ver";
 		}
 	

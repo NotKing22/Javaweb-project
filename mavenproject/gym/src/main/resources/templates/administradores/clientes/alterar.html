@@ -379,7 +379,7 @@
 								
 			    <div class="form-group">
 			        <label for="nome"><strong>Nome de usuário</strong></label>
-			        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome de usuário" 							th:value="${nome}" required>
+			        <input type="text" class="form-control" id="nome_completo" name="nome_completo" placeholder="Nome de usuário" 							th:value="${nome}" required>
 			    </div>
 			    <div class="form-group">
 			        <label for="rg"><strong>RG</strong></label>
@@ -393,19 +393,20 @@
 			    <!-- Campos adicionais -->
 			    <div class="form-group">
 			        <label for="datanascimento"><strong>Data de Nascimento</strong></label>
-			        <input type="text" class="form-control" id="datanascimento" name="datanascimento" placeholder="Data de Nascimento" th:value="${datanascimento}" required>
+			        <input type="text" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento" th:value="${datanascimento}" required>
 			    </div>
 			    <div class="form-group">
 					<label for="sexo">Sexo</label>
 					<select id="sexo" name="sexo" required>
+						<option value="">Selecione</option>
 						<option value="Masculino">Masculino</option>
 						<option value="Feminino">Feminino</option>
 						<option value="Outro">Outro</option>
 					</select>	       
 				    </div>
 			    <div class="form-group">
-					<label for="planoacademia">Plano de Academia:</label>
-					<select id="planoacademia" name="planoacademia" required>
+					<label for="plano_academia">Plano de Academia:</label>
+					<select id="plano_academia" name="plano_academia" required>
 					    <option value="">Selecione</option>
 					    <option value="Mensal">Mensal (R$ 59,90)</option>
 					    <option value="Trimestral">Trimestral (R$ 159,99)</option>
@@ -414,8 +415,8 @@
 					</select>			   
 				 </div>
 			    <div class="form-group">
-					<label for="statusacademia">Status academia:</label>
-					<select id="statusacademia" name="statusacademia" required> 
+					<label for="status_academia">Status academia:</label>
+					<select id="status_academia" name="status_academia" required> 
 						<option value="">Selecione</option>
 						<option value="Ativo">Ativo</option>
 						<option value="Pendente">Pendente</option>

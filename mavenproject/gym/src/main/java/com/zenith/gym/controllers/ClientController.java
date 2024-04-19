@@ -4,16 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.zenith.gym.logins.Admin_db;
 import com.zenith.gym.logins.Login_db;
-import com.zenith.gym.models.AdminModel;
 import com.zenith.gym.models.UserModel;
 import com.zenith.gym.models.UserPlans;
 import com.zenith.gym.models.repositories.LoginRepository;
@@ -57,11 +54,9 @@ public class ClientController {
 		
 		Optional<UserModel> registerInfo = registrationRepo.findById(id);
 		Optional<UserPlans> plansInfo = plansRepo.findById(id);
+		Optional<Login_db> loginInfo = loginRepo.findById(registerInfo.get().getMatricula());
 		
-		//plans nome email plano_academia
-		//registerInfo rg nomecompleto, datanascimento, sexo, endereco, planoacademia, statusacademia
-		if (registerInfo.isPresent() && plansInfo.isPresent()) {
-			System.out.println("run");
+		if (registerInfo.isPresent() && plansInfo.isPresent() && loginInfo.isPresent()) {
 			model.addAttribute("id", registerInfo.get().getID());
 			
 		    model.addAttribute("rg", registerInfo.get().getRG());
@@ -73,9 +68,9 @@ public class ClientController {
 		    model.addAttribute("planoacademia", registerInfo.get().getPlano_academia());
 		    model.addAttribute("statusacademia", registerInfo.get().getStatus_academia());
 		    
-		    model.addAttribute("email", login.getEmail()); //nao esta sendo passado
-		    model.addAttribute("senha", login.getSenha()); //nao esta sendo passado
-		    model.addAttribute("matricula", login.getMatricula()); //nao esta sendo passado
+		    model.addAttribute("email", loginInfo.get().getEmail()); 
+		    model.addAttribute("senha", loginInfo.get().getSenha()); 
+		    model.addAttribute("matricula", loginInfo.get().getMatricula()); 
 		    
 		}
 	    return "administradores/clientes/alterar";
@@ -83,20 +78,24 @@ public class ClientController {
 	
 	@PostMapping("/administradores/clientes/salvar")
 	public String update(HttpServletRequest request, Login_db login, UserModel info) {
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		String matricula = request.getParameter("matricula");
-		String email = request.getParameter("email");
+		final Integer id = Integer.parseInt(request.getParameter("id"));
+		final String matricula = request.getParameter("matricula");
+		final String email = request.getParameter("email");
 		
-			loginRepo.updateLogin(id, email, login.getSenha()); //email e ID sao inalteraveis, por isso so pega a senha do form.
-			registrationRepo.updateUsuario(matricula, info.getRG(), info.getNome_completo(), 
-					info.getData_nascimento(), info.getSexo(), info.getEndereço(), info.getPlano_academia(), info.getStatus_academia());
-			plansRepo.updateUsuario(login.getMatricula(), info.getRG(), info.getNome_completo(), email, info.getPlano_academia());
-			
-			//registrationRepo.updateUser(ID, info.getRG(), info.getNome(), info.getEndereço(), salario);
-			//ao copiar o de cima mude os param
-			
-			//criar update no plansRepo e RegistrationRepo.
-			
+			loginRepo.updateLogin(Integer.parseInt(matricula), email, login.getSenha()); //email e ID sao inalteraveis, por isso so pega a senha do form.
+			registrationRepo.updateUsuario(matricula, 
+										info.getRG(), 
+										info.getNome_completo(), 
+										info.getData_nascimento(), 
+										info.getSexo(), info.getEndereço(), 
+										info.getPlano_academia(), 
+										info.getStatus_academia(), id);
+			plansRepo.updateUsuario(login.getMatricula(),
+										info.getRG(), 
+										info.getNome_completo(),
+										email, 
+										info.getPlano_academia());
+
 			return "redirect:/administradores/clientes";
 		}
 	

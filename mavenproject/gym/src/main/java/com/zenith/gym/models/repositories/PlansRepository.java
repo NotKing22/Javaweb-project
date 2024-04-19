@@ -29,7 +29,7 @@ public interface PlansRepository extends JpaRepository<UserPlans, Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE user_plans SET matricula = :matricula, rg = :rg, nome = :nome, email = :email, plano_academia = :plano_academia)", nativeQuery = true)
+	@Query(value = "UPDATE user_plans SET matricula = :matricula, rg = :rg, nome = :nome, email = :email, plano_academia = :plano_academia", nativeQuery = true)
 	void updateUsuario(@Param("matricula") Integer matricula, 
             @Param("rg") String rg, 
             @Param("nome") String nome,
