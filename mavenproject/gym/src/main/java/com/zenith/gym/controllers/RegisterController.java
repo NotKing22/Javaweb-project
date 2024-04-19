@@ -33,14 +33,14 @@ public class RegisterController {
     @Autowired
     private PlansRepository plansRepository;
     @Autowired
-    private LoginAdmRepository LoginAdmRepository;
+    private LoginAdmRepository LoginAdmRepo;
     
     @GetMapping("/formulario-cadastro")
     public String usuarioCadastro() {
         return "usercadastro"; // Retorna a página de cadastro
     }
     
-    @PostMapping("/entrar")
+ /*   @PostMapping("/entrar")
     public String logou(@ModelAttribute Login_db login, HttpSession session, Model model) {
     	System.out.println("Iniciando método logou...");
     	System.out.println("login " + login.getEmail() + " senha " + login.getSenha());
@@ -90,7 +90,40 @@ public class RegisterController {
             model.addAttribute("erroLogin", "* Credenciais inválidas. Por favor, tente novamente.");
             return "login";
         }
-    }
+    } */
+    
+		@PostMapping("/entrar")
+		public String logou(@ModelAttribute Login_db login, HttpSession session, Model model) {
+		    System.out.println("Iniciando método logou...");
+		    System.out.println("login " + login.getEmail() + " senha " + login.getSenha());
+		
+		    boolean credenciaisCorretas = validarCredenciais(login.getEmail(), login.getSenha());
+		    boolean isAdmin = isAdmin(login.getEmail(), login.getSenha());
+		  
+		    if (!credenciaisCorretas && !isAdmin) {
+		        System.out.println("recusado");
+		        model.addAttribute("erroLogin", "* Credenciais inválidas. Por favor, tente novamente.");
+		        return "login";
+		    }
+		
+		    session.setAttribute("usuarioAutenticado", true);
+		
+		    if (isAdmin) {
+		        session.setAttribute("usuarioAdmin", true);
+		        model.addAttribute("is_admin", true);
+		        model.addAttribute("nome", "Administrador");
+		        System.out.println("Usuário reconhecido como administrador.");
+		    } else {
+		        String plano = plansRepository.findPlanoByEmail(login.getEmail()); //sem check null pq sempre tem plano ao logar
+		        model.addAttribute(plano.toLowerCase(), true);
+		        String nomeCompleto = plansRepository.findNameByEmail(login.getEmail());
+		        if (nomeCompleto != null) {
+		            String primeiroNome = nomeCompleto.split(" ")[0];
+		            model.addAttribute("nome", primeiroNome);
+		        }
+		    }
+		    return "entrar";
+}
 
     private boolean validarCredenciais(String email, String senha) {
         Login_db user = loginRepository.findByEmailAndSenha(email, senha);
@@ -98,14 +131,14 @@ public class RegisterController {
     }
     
     private boolean isAdmin(String email, String senha) {
-        Admin_db user = LoginAdmRepository.findByEmailAndSenha(email, senha);
+        Admin_db user = LoginAdmRepo.findByEmailAndSenha(email, senha);
         return user != null;
     }
     
     @Transactional
     @PostMapping("/cadastrar")
     public String cadastro(Model model, UserModel userModel, Login_db login, UserPlans plans, RedirectAttributes redirectAttributes) {
-    	if (!loginRepository.existsByEmail(login.getEmail())) {
+    	if (!LoginAdmRepo.existsByEmail(login.getEmail()) && !loginRepository.existsByEmail(login.getEmail())) {
     		userModel.setStatus_academia("Ativo");
     		String data = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyddMM"));
     		
@@ -130,5 +163,5 @@ public class RegisterController {
     		return "redirect:/formulario-cadastro";
     	}
     }
-    
+
 }
