@@ -40,58 +40,6 @@ public class RegisterController {
         return "usercadastro"; // Retorna a página de cadastro
     }
     
- /*   @PostMapping("/entrar")
-    public String logou(@ModelAttribute Login_db login, HttpSession session, Model model) {
-    	System.out.println("Iniciando método logou...");
-    	System.out.println("login " + login.getEmail() + " senha " + login.getSenha());
-    	
-        boolean credenciaisCorretas = validarCredenciais(login.getEmail(), login.getSenha());
-        
-        boolean admin = false;
-        if (credenciaisCorretas) {
-            session.setAttribute("usuarioAutenticado", true);
-            
-            if (isAdmin(login.getEmail(), login.getSenha())) {
-            	session.setAttribute("usuarioAdmin", true);
-            	model.addAttribute("mensal", true);
-            	model.addAttribute("trimensal", true);
-            	model.addAttribute("semestral", true);
-            	model.addAttribute("anual", true);
-            	model.addAttribute("is_admin", true);
-            	model.addAttribute("nome", "Administrador");
-            	admin = true;
-            	System.out.println("usuario reconhecido como administrador.");
-            }
-            
-            if (admin == false) {
-	            switch(plansRepository.findPlanoByEmail(login.getEmail())){
-		        	case "Mensal":
-		        		model.addAttribute("mensal", true);
-		        		break;
-		        	case "Trimensal":
-		        		model.addAttribute("trimensal", true);
-		        		break;
-		        	case "Semestral":
-		        		model.addAttribute("semestral", true);
-		        		break;
-		        	case "Anual":
-		        		model.addAttribute("anual", true);
-		        		break;
-	        		default:
-	        			model.addAttribute("sem_plano", true);
-	            }
-	            String[] nome_completo = plansRepository.findNameByEmail(login.getEmail()).split(" ");
-	            String primeiro_nome = nome_completo[0];
-	            model.addAttribute("nome", primeiro_nome);
-            }
-            return "entrar";
-        } else {
-        	System.out.println("recusado");
-            model.addAttribute("erroLogin", "* Credenciais inválidas. Por favor, tente novamente.");
-            return "login";
-        }
-    } */
-    
 		@PostMapping("/entrar")
 		public String logou(@ModelAttribute Login_db login, HttpSession session, Model model) {
 		    System.out.println("Iniciando método logou...");
@@ -115,7 +63,7 @@ public class RegisterController {
 		        System.out.println("Usuário reconhecido como administrador.");
 		    } else {
 		        String plano = plansRepository.findPlanoByEmail(login.getEmail()); //sem check null pq sempre tem plano ao logar
-		        model.addAttribute(plano.toLowerCase(), true);
+		        model.addAttribute(plano, true);
 		        String nomeCompleto = plansRepository.findNameByEmail(login.getEmail());
 		        if (nomeCompleto != null) {
 		            String primeiroNome = nomeCompleto.split(" ")[0];

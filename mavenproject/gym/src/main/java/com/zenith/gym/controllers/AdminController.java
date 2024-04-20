@@ -60,11 +60,6 @@ public class AdminController {
 			loginAdmRepo.save(login);
 			adminRepo.cadastrarAdm(info.getRG(), info.getNome(), info.getEndereço(), salario);
 			
-		/*	String data = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyddMM"));
-			String matricula = (data + info.getID()); 
-			RegistrationRepo.cadastrarUsuario(matricula, info.getRG(), info.getNome(), data, "adm", info.getEndereço(), "Todos", "Ativo");
-			plansRepo.cadastrarPlano(Integer.parseInt(matricula), info.getRG(), info.getNome(), login.getEmail(), "Todos");
-			*/
 			return "redirect:/administradores/ver";
 		}
 	
@@ -81,7 +76,7 @@ public class AdminController {
 		
 		Optional<AdminModel> adminInfos = adminRepo.findById(id);
 		Optional<Admin_db> adminLogins = loginAdmRepo.findById(id);
-		
+		System.out.println("DEBUG " + adminInfos.isPresent() + " " + adminLogins.isPresent());
 		if (adminInfos.isPresent() && adminLogins.isPresent()) {
 			model.addAttribute("id", adminInfos.get().getID());
 			

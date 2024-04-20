@@ -219,23 +219,23 @@
             <h3>Plano Mensal</h3>
             <p>add Descrição...</p>
             <p>Validade: 1 Mês</p>
-			<div class="plano_ativo" th:if="${mensal == true}"> 
+			<div class="plano_ativo" th:if="${Mensal == true}"> 
 				<p>	<span>Plano ativo</span></p>
 			</div>
-			<div class="plano_inativo" th:unless="${mensal == true}">
+			<div class="plano_inativo" th:unless="${Mensal == true}">
 			    <p>Plano Mensal inativo</p>
 			</div>
         </div>
         <div class="plan-box">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPyKmXulnKgfdf-6Ghgs4Ob_lJq5QRT2MJns0NdnJWVg&amp;s" alt="Plano Trimestral">
-            <h3>Plano Trimensal</h3>
+            <h3>Plano Trimestral</h3>
             <p>add Descrição...</p>
             <p>Validade: 3 Meses</p>
-			<div class="plano_ativo" th:if="${trimensal == true}"> 
+			<div class="plano_ativo" th:if="${Trimestral == true}"> 
 				<p>	<span>Plano ativo</span></p>
 			</div>
-			<div class="plano_inativo" th:unless="${trimensal != null}">
-			    <p>Plano Trimensal inativo</p>
+			<div class="plano_inativo" th:unless="${Trimestral != null}">
+			    <p>Plano Trimestral inativo</p>
 			</div>
         </div>
         <div class="plan-box">
@@ -243,10 +243,10 @@
             <h3>Plano Semestral</h3>
             <p>add Descrição...</p>
             <p>Validade: 6 Meses</p>
-			<div class="plano_ativo" th:if="${semestral == true}"> 
+			<div class="plano_ativo" th:if="${Semestral == true}"> 
 				<p>	<span>Plano ativo</span></p>
 			</div>
-			<div class="plano_inativo" th:unless="${semestral != null}">
+			<div class="plano_inativo" th:unless="${Semestral != null}">
 			    <p>Plano Semestral inativo</p>
 			</div>
         </div>
@@ -255,10 +255,10 @@
             <h3>Plano Anual</h3>
             <p>add Descrição...</p>
             <p>Validade: 12 Meses</p>
-			<div class="plano_ativo" th:if="${anual == true}"> 
+			<div class="plano_ativo" th:if="${Anual == true}"> 
 				<p>	<span>Plano ativo</span></p>
 			</div>
-			<div class="plano_inativo" th:unless="${anual != null}">
+			<div class="plano_inativo" th:unless="${Anual != null}">
 			    <p>Plano Anual inativo</p>
 			</div>
         </div>

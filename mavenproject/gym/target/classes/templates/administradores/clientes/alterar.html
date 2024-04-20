@@ -427,7 +427,12 @@
 				    <label for="senha"><strong>Senha de acesso</strong></label>
 				    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha do usuário" th:value="${senha}" required>
 				</div>
-			    
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" class="form-control" th:value="${email}" id="email" name="email" readonly/>
+					<label for="text">Matrícula:</label>
+					<input type="text" class="form-control" th:value="${matricula}" id="matricula" name="matricula" readonly/>
+				</div>
 			    <button type="submit" class="btn btn-primary" style="background-color: rgb(240, 120, 0);">Alterar dados</button>
 			</form>
 
