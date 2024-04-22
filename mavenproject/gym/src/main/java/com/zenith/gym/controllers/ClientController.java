@@ -18,6 +18,7 @@ import com.zenith.gym.models.repositories.PlansRepository;
 import com.zenith.gym.models.repositories.RegistrationsRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ClientController {
@@ -30,73 +31,99 @@ public class ClientController {
 	private LoginRepository loginRepo;
 	
 	@GetMapping("/administradores/clientes")
-	public String index(Model model) {
-		List<UserModel> clientes = (List<UserModel>) registrationRepo.findAll();
-		model.addAttribute("clientes", clientes);
-		return "administradores/clientes";
+	public String index(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
+			List<UserModel> clientes = (List<UserModel>) registrationRepo.findAll();
+			model.addAttribute("clientes", clientes);
+			return "administradores/clientes";
+		}
+		return "redirect:/login";
 	}
 	
 	
 	@GetMapping("/administradores/clientes/{id}/excluir")
-	public String excluir(@PathVariable("id") int id) {
-		Optional<UserModel> registerInfo = registrationRepo.findById(id);
+	public String excluir(@PathVariable("id") int id, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
+		
+			Optional<UserModel> registerInfo = registrationRepo.findById(id);
+		
 		if (registerInfo.isPresent()) {
 			int matriculaID = registerInfo.get().getMatricula();
 			loginRepo.deleteById(matriculaID);
 		}
-		registrationRepo.deleteById(id);
-		plansRepo.deleteById(id);
-		return "redirect:/administradores/clientes";
+			registrationRepo.deleteById(id);
+			plansRepo.deleteById(id);
+			return "redirect:/administradores/clientes";
+		}
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/administradores/clientes/{id}/editar")
-	public String alterar(@PathVariable("id") int id, UserModel info, Login_db login, Model model) {
+	public String alterar(@PathVariable("id") int id, UserModel info, Login_db login, Model model, HttpServletRequest request) {
 		
-		Optional<UserModel> registerInfo = registrationRepo.findById(id);
-		Optional<UserPlans> plansInfo = plansRepo.findById(id);
-		Optional<Login_db> loginInfo = loginRepo.findById(registerInfo.get().getMatricula());
+		HttpSession session = request.getSession(false);
 		
-		if (registerInfo.isPresent() && plansInfo.isPresent() && loginInfo.isPresent()) {
-			model.addAttribute("id", registerInfo.get().getID());
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
+		
+			Optional<UserModel> registerInfo = registrationRepo.findById(id);
+			Optional<UserPlans> plansInfo = plansRepo.findById(id);
+			Optional<Login_db> loginInfo = loginRepo.findById(registerInfo.get().getMatricula());
 			
-		    model.addAttribute("rg", registerInfo.get().getRG());
-		    model.addAttribute("nome", registerInfo.get().getNome_completo());
-		    model.addAttribute("endereco", registerInfo.get().getEndereço());
-		    
-		    model.addAttribute("datanascimento", registerInfo.get().getData_nascimento());
-		    model.addAttribute("sexo", registerInfo.get().getSexo());
-		    model.addAttribute("planoacademia", registerInfo.get().getPlano_academia());
-		    model.addAttribute("statusacademia", registerInfo.get().getStatus_academia());
-		    
-		    model.addAttribute("email", loginInfo.get().getEmail()); 
-		    model.addAttribute("senha", loginInfo.get().getSenha()); 
-		    model.addAttribute("matricula", loginInfo.get().getMatricula()); 
-		    
+			if (registerInfo.isPresent() && plansInfo.isPresent() && loginInfo.isPresent()) {
+				model.addAttribute("id", registerInfo.get().getID());
+				
+			    model.addAttribute("rg", registerInfo.get().getRG());
+			    model.addAttribute("nome", registerInfo.get().getNome_completo());
+			    model.addAttribute("endereco", registerInfo.get().getEndereço());
+			    
+			    model.addAttribute("datanascimento", registerInfo.get().getData_nascimento());
+			    model.addAttribute("sexo", registerInfo.get().getSexo());
+			    model.addAttribute("planoacademia", registerInfo.get().getPlano_academia());
+			    model.addAttribute("statusacademia", registerInfo.get().getStatus_academia());
+			    
+			    model.addAttribute("email", loginInfo.get().getEmail()); 
+			    model.addAttribute("senha", loginInfo.get().getSenha()); 
+			    model.addAttribute("matricula", loginInfo.get().getMatricula()); 
+			    
+			}
+		    return "administradores/clientes/alterar";
+			}
+			return "redirect:/login";
 		}
-	    return "administradores/clientes/alterar";
-	}
 	
 	@PostMapping("/administradores/clientes/salvar")
 	public String update(HttpServletRequest request, Login_db login, UserModel info) {
-		final Integer id = Integer.parseInt(request.getParameter("id"));
-		final String matricula = request.getParameter("matricula");
-		final String email = request.getParameter("email");
+		HttpSession session = request.getSession(false);
 		
-			loginRepo.updateLogin(Integer.parseInt(matricula), email, login.getSenha()); //email e ID sao inalteraveis, por isso so pega a senha do form.
-			registrationRepo.updateUsuario(matricula, 
-										info.getRG(), 
-										info.getNome_completo(), 
-										info.getData_nascimento(), 
-										info.getSexo(), info.getEndereço(), 
-										info.getPlano_academia(), 
-										info.getStatus_academia(), id);
-			plansRepo.updateUsuario(login.getMatricula(),
-										info.getRG(), 
-										info.getNome_completo(),
-										email, 
-										info.getPlano_academia());
-
-			return "redirect:/administradores/clientes";
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
+			
+			final Integer id = Integer.parseInt(request.getParameter("id"));
+			final String matricula = request.getParameter("matricula");
+			final String email = request.getParameter("email");
+			
+				loginRepo.updateLogin(Integer.parseInt(matricula), email, login.getSenha()); //email e ID sao inalteraveis, por isso so pega a senha do form.
+				registrationRepo.updateUsuario
+				    (matricula, 
+					info.getRG(), 
+					info.getNome_completo(), 
+					info.getData_nascimento(), 
+					info.getSexo(), info.getEndereço(), 
+					info.getPlano_academia(), 
+					info.getStatus_academia(), id);
+				plansRepo.updateUsuario
+				   (login.getMatricula(),
+					info.getRG(), 
+					info.getNome_completo(),
+					email, 
+					info.getPlano_academia());
+	
+				return "redirect:/administradores/clientes";
+				}
+			return "redirect:/login";
 		}
 	
 }

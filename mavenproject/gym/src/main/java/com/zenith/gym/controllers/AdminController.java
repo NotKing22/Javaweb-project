@@ -1,7 +1,5 @@
 package com.zenith.gym.controllers;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +14,9 @@ import com.zenith.gym.logins.Admin_db;
 import com.zenith.gym.models.AdminModel;
 import com.zenith.gym.models.repositories.AdminRepository;
 import com.zenith.gym.models.repositories.LoginAdmRepository;
-import com.zenith.gym.models.repositories.PlansRepository;
-import com.zenith.gym.models.repositories.RegistrationsRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -28,55 +25,66 @@ public class AdminController {
 	private AdminRepository adminRepo; 
 	@Autowired
 	private LoginAdmRepository loginAdmRepo;
-	@Autowired
-	private RegistrationsRepository RegistrationRepo;
-	@Autowired
-	private PlansRepository plansRepo;
 	
 	int salario = 5000;
 	
 	@GetMapping("/administradores/ver")
 	public String index(Model model, HttpServletRequest request) {
-	//	HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(false);
 	
-		//session off durante periodo de desenvolvimento, para nao atrapalhar.
-		
-	//	if (session != null && session.getAttribute("usuarioAdmin") != null) {
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		
 			List<AdminModel> administradores = (List<AdminModel>) adminRepo.findAll();
 			model.addAttribute("administradores", administradores); //nome da table
 			return "administradores/ver";
-	//	}
-	//	return "redirect:/login";
+		}
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/administradores/novo")
-	public String novo() {
+	public String novo(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 			return "administradores/novo";
 		}
+		return "redirect:/login";
+	}
 	
 	@PostMapping("/administradores/criar")
-	public String criar(Admin_db login, AdminModel info) {
+	public String criar(Admin_db login, AdminModel info, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 			loginAdmRepo.save(login);
 			adminRepo.cadastrarAdm(info.getRG(), info.getNome(), info.getEndereço(), salario);
 			
 			return "redirect:/administradores/ver";
 		}
+		return "redirect:/login";
+	}
 	
 	@GetMapping("/administradores/{id}/excluir")
-	public String excluir(@PathVariable("id") int id) {
+	public String excluir(@PathVariable("id") int id, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		loginAdmRepo.deleteById(id);
 		adminRepo.deleteById(id);
 		
 		return "redirect:/administradores/ver";
+		}
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/administradores/{id}/editar")
-	public String alterar(@PathVariable("id") int id, AdminModel info, Model model) {
+	public String alterar(@PathVariable("id") int id, AdminModel info, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		
 		Optional<AdminModel> adminInfos = adminRepo.findById(id);
 		Optional<Admin_db> adminLogins = loginAdmRepo.findById(id);
-		System.out.println("DEBUG " + adminInfos.isPresent() + " " + adminLogins.isPresent());
 		if (adminInfos.isPresent() && adminLogins.isPresent()) {
 			model.addAttribute("id", adminInfos.get().getID());
 			
@@ -88,10 +96,15 @@ public class AdminController {
 		    model.addAttribute("senha", adminLogins.get().getSenha()); 
 		}
 	    return "administradores/alterar";
+		}
+		return "redirect:/login";
 	}
 	
 	@PostMapping("/administradores/salvar")
 	public String update(HttpServletRequest request, Admin_db login, AdminModel info) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		Integer ID = Integer.parseInt(request.getParameter("id"));
 		
 			loginAdmRepo.updateLogin(ID, login.getEmail(), login.getSenha());
@@ -99,11 +112,18 @@ public class AdminController {
 			
 			return "redirect:/administradores/ver";
 		}
+		return "redirect:/login";
+	}
 
 	
 	@GetMapping("/administradores/dashboard")
-	public String dashboard() {
+	public String dashboard(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		
+		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 			return "administradores/dashboard";
+			}
+		return "redirect:/login";
 		}
 	
 	}

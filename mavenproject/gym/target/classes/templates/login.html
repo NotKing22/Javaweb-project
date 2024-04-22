@@ -26,7 +26,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 400px;
-            border: 1px solid #ccc; /* Adicionando borda com 1px de largura */
+            border: 1px solid #ccc; 
         }
         .login-container h2 {
             text-align: center;
@@ -73,6 +73,7 @@
             margin-top: 10px;
         }
     </style>
+	
 </head>
 <body>
 
@@ -90,7 +91,7 @@
 		<div th:if="${erroLogin}" th:text="${erroLogin}" class="error-message"></div>
 		<br>
         <div class="form-action">
-            <button type="submit">Entrar</button>
+            <button type="submit" id="butao">Entrar</button>
         </div>
 
     </form>

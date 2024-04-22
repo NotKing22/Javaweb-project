@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modalidades - Academia Zenith</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #1a1a1a;
+        color: #cccccc;
+    }
+    .nav-bar {
+        background-color: #333333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        padding: 10px 50px;
+    }
+    .nav-bar a {
+        color: #f2f2f2;
+        text-decoration: none;
+        padding: 10px;
+        margin: 0 5px;
+    }
+    .nav-bar a:hover {
+        background-color: rgb(162, 162, 162);
+        border-radius: 5px;
+    }
+    .header {
+        padding: 40px 0;
+        text-align: center;
+        background-color: #202020;
+        color: #ffffff;
+        font-family: Luminari, fantasy;
+		
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        animation: changeColor 5s infinite alternate;
+    }
+    .main-image {
+        width: 100%;
+        height: 70vh;
+        background-image: url(https://www.oreporterregional.com.br/images/noticias/71543/158bba9a0d2f5bbfe78177e0ade6aad9.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+    .content {
+        padding: 20px;
+        text-align: center;
+    }
+    .section {
+        margin: 40px 0;
+    }
+    .section h2 {
+        color: #ffcc00;
+        font-size: 2rem;
+    }
+    .section p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    .footer {
+        background-color: #333333;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+    .footer a {
+        text-decoration: underline;
+        color: skyblue;
+    }
+    .btn, .signup-btn, .login-btn {
+        display: inline-block;
+        background-color: #ff6600;
+        color: #ffffff;
+        padding: 10px 20px;
+        margin: 20px 0;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .signup-btn {
+        background-color: rgb(198, 0, 0);
+    }
+    .login-btn {
+        background-color: rgb(255, 128, 0);
+    }
+    .btn:hover, .signup-btn:hover, .login-btn:hover {
+        opacity: 0.85;
+    }
+    .line-divider {
+        width: 100%;
+        height: 2px;
+        background-color: red;
+    }
+    .modalidades-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .modalidade-group {
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+    }
+	.modalidade-box {
+	    width: calc(50% - 20px);
+	    background-color: rgb(255, 255, 255);
+	    padding: 20px;
+	    margin-bottom: 40px;
+	    border-radius: 10px;
+		margin-right: 7px;
+	    box-shadow: 0 4px 12px rgb(255, 255, 255);
+	    text-align: center;
+
+	    min-height: 350px; 
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: space-between;
+	}
+	
+	.modalidade-box img {
+	    width: 100%;
+	    border-radius: 5px;
+
+	    flex-shrink: 0;
+	    margin-bottom: 10px; 
+	}
+	
+	.modalidade-box h3 {
+	    color: rgb(0, 0, 0);
+	    margin-top: 20px;
+	   border-radius: 5px;
+	    margin-bottom: 10px; 
+	}
+	
+	.modalidade-box p {
+	    color: rgb(27, 27, 27);
+		font-weight: bold;
+	}
+	
+	.modalidade-box button {
+	    background-color: #ff6600;
+	    color: #ffffff;
+	    padding: 10px 20px;
+	    margin-top: auto; 
+	    border-radius: 5px;
+	    transition: background-color 0.3s ease;
+	}
+	
+	.modalidade-box h3 {
+	    background-color: rgb(255, 255, 0);
+	    text-align: center;
+	    line-height: 10vh; 
+		font-family: Luminari, fantasy;
+		font-size: 30px;
+	}
+	
+	.modalidade-box button:hover {
+	    opacity: 0.85;
+	}
+    @keyframes changeColor {
+        0% { color: #ff6600; }
+        50% { color: rgb(255, 255, 0); }
+        100% { color: rgb(174, 70, 0); }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Academia Zenith</h1>
+</div>
+
+<div class="line-divider"></div>
+
+<div class="nav-bar">
+    <div>
+        <a href="/">Home</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/modalidades">Modalidades</a>
+        <a href="/contato">Contato</a>
+    </div>
+    <div>
+        <a href="/login" class="login-btn">Área do aluno</a>
+        <a href="/formulario-cadastro" class="signup-btn">Matricule-se</a>
+    </div>
+</div>
+
+<div class="main-image"></div>
+
+<div class="content">
+    <div class="section">
+        <h2>Modalidades</h2>
+        <div class="modalidades-container">
+            <div class="modalidade-group">
+                <div class="modalidade-box">
+                    <img src="https://landing-pages-smart.s3.amazonaws.com/modalidades-treinos/smart-shape/cover.png" alt="Imagem da modalidade">
+                    <h3>ZEN SHAPE</h3>
+                    <p>Duração: 30 minutos</p>
+                    <p>Intensidade: Alta</p>
+					<p>Nosso exclusivo circuito de emagrecimento, intenso e com duração de 30 minutos é uma combinação de vários exercícios.</p>
+                    <button>Saiba Mais</button>
+                </div>
+                <div class="modalidade-box">
+                    <img src="https://landing-pages-smart.s3.amazonaws.com/modalidades-treinos/smart-cross/cover.png" alt="Imagem da modalidade">
+                    <h3>ZEN CROSS</h3>
+                    <p>Duração: 30 minutos</p>
+                    <p>Intensidade: Alta</p>
+					<p>Emagrecimento com ganho de condicionamento físico em apenas 30 minutos? Esse é o Smart Cross, nosso treino de funcional coletivo de alta intensidade.</p>
+                    <button>Saiba Mais</button>
+                </div>
+            </div>
+            <div class="modalidade-group">
+                <div class="modalidade-box">
+                    <img src="https://landing-pages-smart.s3.amazonaws.com/modalidades-treinos/smart-hit/cover.png" alt="Imagem da modalidade">
+                    <h3>ZEN HIT</h3>
+                    <p>Duração: 30 minutos</p>
+                    <p>Intensidade: Alta</p>
+					<p>Um treino intervalado de alta intensidade que usa o peso do próprio corpo. Ideal pra quem busca resultados rápidos.</p>
+                    <button>Saiba Mais</button>
+                </div>
+                <div class="modalidade-box">
+                    <img src="https://landing-pages-smart.s3.amazonaws.com/modalidades-treinos/smart-strong/cover.png" alt="Imagem da modalidade">
+                    <h3>ZEN STRONG</h3>
+                    <p>Duração: 30 minutos</p>
+                    <p>Intensidade: Moderada-Alta</p>
+					<p>O Smart Strong é um treino coletivo de hipertrofia, com foco em fortalecimento muscular, trabalho de força e resistência.</p>
+                    <button>Saiba Mais</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© 2024 Academia Zenith. Todos os direitos reservados.</p>
+    <br>
+    <p>Desenvolvido por Matheus de Jesus</p>
+    <a href="https://github.com/NotKing22">Visualizar GitHub</a>
+</div>
+
+</body>
+</html>

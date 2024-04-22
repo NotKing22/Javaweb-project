@@ -11,4 +11,14 @@ public class IndexController {
 		return "index";
 	}
 	
+	@GetMapping("/modalidades")
+	public String modalidades() {
+		return "/modalidades";
+	}
+	
+	@GetMapping("/contato")
+	public String contato() {
+		return "/contato";
+	}
+	
 }
