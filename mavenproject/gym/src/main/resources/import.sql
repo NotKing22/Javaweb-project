@@ -3,6 +3,7 @@ INSERT INTO admin_model(rg, salario, endereço, nome) VALUES ('none', 0.0, 'Nenh
 INSERT INTO admin_model(rg, salario, endereço, nome) VALUES ('123.456-789-10', 5000.0, 'Rua Principal', 'Administrador 1');
 INSERT INTO admin_model(rg, salario, endereço, nome) VALUES ('987.654-321-10', 6000.0, 'Rua Secundária', 'Administrador 2');
 INSERT INTO admin_model(rg, salario, endereço, nome) VALUES ('654.321-987-10', 5500.0, 'Avenida Central', 'Administrador 3');
+INSERT INTO admin_model(rg, salario, endereço, nome) VALUES ('443.321-987-10', 5500.0, 'Avenida Baixa', 'Administrador 4');
 
 -- CADASTRANDO ADM NA TABLE LOGIN ONLY ADMIN --
 INSERT INTO admin_db(email, senha) VALUES ('admin@gmail.com', 'admin');

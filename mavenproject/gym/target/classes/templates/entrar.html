@@ -196,19 +196,25 @@
 </div>
 
 <div class="nav-bar">
-    <div>
-        <a href="#">Home</a>
-        <a href="#">Sobre</a>
-        <a href="#">Serviços</a>
-        <a href="#">Contato</a>
-		<div class="is_admin" th:if="${is_admin == true}"> 
-			<a href="/administradores/dashboard">Dashboard administrativa</a>
-		</div>
+    <div class="is_admin" th:if="${is_admin == true}"> 
+		<a href="/">Home</a>
+		<a href="/sobre">Sobre</a>
+		<a href="/modalidades">Modalidades</a>
+		<a href="/contato">Contato</a>
+		<a href="/administradores/dashboard">Dashboard administrativa</a>
+    </div>
+    <div class="is_admin" th:unless="${is_admin == true}"> 
+		<a href="/">Home</a>
+		<a href="/sobre">Sobre</a>
+		<a href="/modalidades">Modalidades</a>
+		<a href="/contato">Contato</a>
     </div>
     <div>
         <a href="/login" class="login-btn">Sair</a>
     </div>
 </div>
+
+
 <div class="line-divider"></div>
 
 <div class="container">

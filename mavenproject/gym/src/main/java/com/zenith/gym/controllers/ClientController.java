@@ -13,29 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.zenith.gym.logins.Login_db;
 import com.zenith.gym.models.UserModel;
 import com.zenith.gym.models.UserPlans;
-import com.zenith.gym.models.repositories.LoginRepository;
-import com.zenith.gym.models.repositories.PlansRepository;
-import com.zenith.gym.models.repositories.RegistrationsRepository;
+import com.zenith.gym.services.ClientServices;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ClientController {
-
+	
 	@Autowired
-	private RegistrationsRepository registrationRepo;
-	@Autowired
-	private PlansRepository plansRepo;
-	@Autowired
-	private LoginRepository loginRepo;
+	ClientServices servicesClient;
 	
 	@GetMapping("/administradores/clientes")
 	public String index(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
-			List<UserModel> clientes = (List<UserModel>) registrationRepo.findAll();
+			List<UserModel> clientes = (List<UserModel>) servicesClient.findAllRegistrationRepo();
 			model.addAttribute("clientes", clientes);
 			return "administradores/clientes";
 		}
@@ -49,14 +43,14 @@ public class ClientController {
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		
-			Optional<UserModel> registerInfo = registrationRepo.findById(id);
+			Optional<UserModel> registerInfo = servicesClient.findByIDregistrationRepo(id);
 		
 		if (registerInfo.isPresent()) {
 			int matriculaID = registerInfo.get().getMatricula();
-			loginRepo.deleteById(matriculaID);
+			servicesClient.deleteByIDlogin(matriculaID);
 		}
-			registrationRepo.deleteById(id);
-			plansRepo.deleteById(id);
+			servicesClient.deleteByIDregistrationRepo(id);
+			servicesClient.deleteByIDplans(id);
 			return "redirect:/administradores/clientes";
 		}
 		return "redirect:/login";
@@ -69,9 +63,9 @@ public class ClientController {
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		
-			Optional<UserModel> registerInfo = registrationRepo.findById(id);
-			Optional<UserPlans> plansInfo = plansRepo.findById(id);
-			Optional<Login_db> loginInfo = loginRepo.findById(registerInfo.get().getMatricula());
+			Optional<UserModel> registerInfo = servicesClient.findByIDregistrationRepo(id);
+			Optional<UserPlans> plansInfo = servicesClient.findByIDplans(id);
+			Optional<Login_db> loginInfo = servicesClient.findByIDlogin(registerInfo.get().getMatricula());
 			
 			if (registerInfo.isPresent() && plansInfo.isPresent() && loginInfo.isPresent()) {
 				model.addAttribute("id", registerInfo.get().getID());
@@ -105,8 +99,9 @@ public class ClientController {
 			final String matricula = request.getParameter("matricula");
 			final String email = request.getParameter("email");
 			
-				loginRepo.updateLogin(Integer.parseInt(matricula), email, login.getSenha()); //email e ID sao inalteraveis, por isso so pega a senha do form.
-				registrationRepo.updateUsuario
+				servicesClient.updateLogin(Integer.parseInt(matricula), email, login.getSenha()); //email e ID sao inalteraveis, por isso so pega a senha do form.
+				
+				servicesClient.updateUsuario
 				    (matricula, 
 					info.getRG(), 
 					info.getNome_completo(), 
@@ -114,7 +109,7 @@ public class ClientController {
 					info.getSexo(), info.getEndereço(), 
 					info.getPlano_academia(), 
 					info.getStatus_academia(), id);
-				plansRepo.updateUsuario
+				servicesClient.updatePlans
 				   (login.getMatricula(),
 					info.getRG(), 
 					info.getNome_completo(),

@@ -12,19 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.zenith.gym.logins.Admin_db;
 import com.zenith.gym.models.AdminModel;
-import com.zenith.gym.models.repositories.AdminRepository;
-import com.zenith.gym.models.repositories.LoginAdmRepository;
+import com.zenith.gym.services.AdminServices;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
-
+	
 	@Autowired
-	private AdminRepository adminRepo; 
-	@Autowired
-	private LoginAdmRepository loginAdmRepo;
+	AdminServices servicesAdmin;
 	
 	int salario = 5000;
 	
@@ -34,7 +31,7 @@ public class AdminController {
 	
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		
-			List<AdminModel> administradores = (List<AdminModel>) adminRepo.findAll();
+			List<AdminModel> administradores = (List<AdminModel>) servicesAdmin.findAllAdminrepo();
 			model.addAttribute("administradores", administradores); //nome da table
 			return "administradores/ver";
 		}
@@ -56,8 +53,8 @@ public class AdminController {
 		HttpSession session = request.getSession(false);
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
-			loginAdmRepo.save(login);
-			adminRepo.cadastrarAdm(info.getRG(), info.getNome(), info.getEndereço(), salario);
+			servicesAdmin.save(login);
+			servicesAdmin.cadastrarAdm(info.getRG(), info.getNome(), info.getEndereço(), salario);
 			
 			return "redirect:/administradores/ver";
 		}
@@ -69,8 +66,8 @@ public class AdminController {
 		HttpSession session = request.getSession(false);
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
-		loginAdmRepo.deleteById(id);
-		adminRepo.deleteById(id);
+		servicesAdmin.deleteLoginAdminRepoByID(id);
+		servicesAdmin.deleteAdminRepoByID(id);
 		
 		return "redirect:/administradores/ver";
 		}
@@ -83,8 +80,8 @@ public class AdminController {
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		
-		Optional<AdminModel> adminInfos = adminRepo.findById(id);
-		Optional<Admin_db> adminLogins = loginAdmRepo.findById(id);
+		Optional<AdminModel> adminInfos = servicesAdmin.findByIDAdminrepo(id);
+		Optional<Admin_db> adminLogins = servicesAdmin.findByIDLoginadm(id);
 		if (adminInfos.isPresent() && adminLogins.isPresent()) {
 			model.addAttribute("id", adminInfos.get().getID());
 			
@@ -106,9 +103,8 @@ public class AdminController {
 		
 		if (session != null && session.getAttribute("usuarioAdmin") != null) {
 		Integer ID = Integer.parseInt(request.getParameter("id"));
-		
-			loginAdmRepo.updateLogin(ID, login.getEmail(), login.getSenha());
-			adminRepo.updateAdm(ID, info.getRG(), info.getNome(), info.getEndereço(), salario);
+			
+			servicesAdmin.updateAdm(ID, info.getRG(), info.getNome(), login.getEmail(), login.getSenha(), info.getEndereço(), salario);
 			
 			return "redirect:/administradores/ver";
 		}

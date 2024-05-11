@@ -16,24 +16,15 @@ import com.zenith.gym.logins.Admin_db;
 import com.zenith.gym.logins.Login_db;
 import com.zenith.gym.models.UserModel;
 import com.zenith.gym.models.UserPlans;
-import com.zenith.gym.models.repositories.LoginAdmRepository;
-import com.zenith.gym.models.repositories.LoginRepository;
-import com.zenith.gym.models.repositories.PlansRepository;
-import com.zenith.gym.models.repositories.RegistrationsRepository;
+import com.zenith.gym.services.LoginServices;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class RegisterController {
-    
-    @Autowired
-    private RegistrationsRepository repositorySQL;
-    @Autowired
-    private LoginRepository loginRepository;
-    @Autowired
-    private PlansRepository plansRepository;
-    @Autowired
-    private LoginAdmRepository LoginAdmRepo;
+	
+	@Autowired
+	LoginServices servicesLogin;
     
     @GetMapping("/formulario-cadastro")
     public String usuarioCadastro() {
@@ -62,9 +53,9 @@ public class RegisterController {
 		        model.addAttribute("nome", "Administrador");
 		        System.out.println("Usuário reconhecido como administrador.");
 		    } else {
-		        String plano = plansRepository.findPlanoByEmail(login.getEmail()); //sem check null pq sempre tem plano ao logar
+		        String plano = servicesLogin.findPlanosByEmail(login.getEmail()); //sem check null pq sempre tem plano ao logar
 		        model.addAttribute(plano, true);
-		        String nomeCompleto = plansRepository.findNameByEmail(login.getEmail());
+		        String nomeCompleto = servicesLogin.findNameByEmail(login.getEmail());
 		        if (nomeCompleto != null) {
 		            String primeiroNome = nomeCompleto.split(" ")[0];
 		            model.addAttribute("nome", primeiroNome);
@@ -74,33 +65,33 @@ public class RegisterController {
 }
 
     private boolean validarCredenciais(String email, String senha) {
-        Login_db user = loginRepository.findByEmailAndSenha(email, senha);
+        Login_db user = servicesLogin.validarCredenciais(email, senha);
         return user != null;
     }
     
     private boolean isAdmin(String email, String senha) {
-        Admin_db user = LoginAdmRepo.findByEmailAndSenha(email, senha);
+        Admin_db user = servicesLogin.isAdmin(email, senha);
         return user != null;
     }
     
     @Transactional
     @PostMapping("/cadastrar")
     public String cadastro(Model model, UserModel userModel, Login_db login, UserPlans plans, RedirectAttributes redirectAttributes) {
-    	if (!LoginAdmRepo.existsByEmail(login.getEmail()) && !loginRepository.existsByEmail(login.getEmail())) {
+    	if (!servicesLogin.loginAdmExistsByEmail(login.getEmail()) && !servicesLogin.loginExistsByEmail(login.getEmail())) {
     		userModel.setStatus_academia("Ativo");
     		String data = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyddMM"));
     		
-	    	repositorySQL.save(userModel);
+	    	servicesLogin.save(userModel);
 	    	
 	    	userModel.setMatricula(Integer.parseInt(data + userModel.getID())); 
 	    	
-	    	repositorySQL.save(userModel);
+	    	servicesLogin.save(userModel);
 	    	
-	    	loginRepository.cadastrarLogin(userModel.getMatricula(), 
+	    	servicesLogin.registerLogin(userModel.getMatricula(), 
 							    			login.getEmail(),
 							    			login.getSenha());
 
-	    	plansRepository.cadastrarPlano(userModel.getMatricula(), 
+	    	servicesLogin.registerUserPlans(userModel.getMatricula(), 
 						    			userModel.getRG(), 
 						    			userModel.getNome_completo(), 
 						    			login.getEmail(), 
