@@ -9,7 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin - Dashboard</title>
+	
+	<link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_favicon_icon_130608.png" type="image/x-icon">
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -380,17 +382,17 @@
 			        <th>Mensalidade</th>
 					<th>Planos</th>
 			    </tr>
-				<tr th:each="userModel : ${clientes}">
-				    <td th:text="${userModel.matricula}">matricula</td>
-				    <td th:text="${userModel.RG}">rg</td>
-				    <td th:text="${userModel.nome_completo}">nome</td>
-				    <td th:text="${userModel.sexo}">sexo</td>
-				    <td th:text="${userModel.plano_academia}">planos</td>
-				    <td th:text="${userModel.status_academia}">status</td>
+				<tr th:each="model : ${clientes}">
+				    <td th:text="${model.matricula}">matricula</td>
+				    <td th:text="${model.RG}">rg</td>
+				    <td th:text="${model.nome_completo}">nome</td>
+				    <td th:text="${model.sexo}">sexo</td>
+				    <td th:text="${model.plano_academia}">planos</td>
+				    <td th:text="${model.status_academia}">status</td>
 					
 			        <td>
-						<a th:href="@{'/administradores/clientes/' + ${userModel.ID} + '/editar'}" class="btn btn-warning">Alterar</a>
-						<a th:href="@{'/administradores/clientes/' + ${userModel.ID} + '/excluir'}" class="btn btn-danger">Excluir</a>
+						<a th:href="@{'/administradores/clientes/' + ${model.ID} + '/editar'}" class="btn btn-warning">Alterar</a>
+						<a th:href="@{'/administradores/clientes/' + ${model.ID} + '/excluir'}" class="btn btn-danger" onclick="return confirm('Deseja prosseguir com a exclusão?')">Excluir</a>
 			        </td>
 			    </tr>
 			</table>

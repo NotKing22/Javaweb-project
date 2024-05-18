@@ -11,6 +11,11 @@ public class IndexController {
 		return "index";
 	}
 	
+	@GetMapping("/faq")
+	public String faq() {
+		return "/faq";
+	}
+	
 	@GetMapping("/modalidades")
 	public String modalidades() {
 		return "/modalidades";

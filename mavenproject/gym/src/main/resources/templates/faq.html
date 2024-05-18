@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dúvidas frequentes - Zenith</title>
+
+<link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_favicon_icon_130608.png" type="image/x-icon">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #1a1a1a;
+        color: #cccccc;
+    }
+    .nav-bar {
+        background-color: #333333;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+        padding: 10px 50px;
+    }
+    .nav-bar a {
+        color: #f2f2f2;
+        text-decoration: none;
+        padding: 10px;
+        margin: 0 5px;
+    }
+    .nav-bar a:hover {
+        background-color: rgb(162, 162, 162);
+        border-radius: 5px;
+    }
+    .header {
+        padding: 40px 0;
+        text-align: center;
+        background-color: #202020;
+        color: #ffffff;
+        font-family: Luminari, fantasy;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        animation: changeColor 5s infinite alternate;
+    }
+    .main-image {
+        width: 100%;
+        height: 40vh;
+        background-image: url(https://nlindia.com/wp-content/uploads/2021/06/faq-banner.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+    .footer {
+        background-color: #333333;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+    .footer a {
+        text-decoration: underline;
+        color: skyblue;
+    }
+	.btn, .signup-btn, .login-btn {
+	    display: inline-block;
+	    background-color: #ff6600;
+	    color: #ffffff;
+	    padding: 10px 20px;
+	    margin: 20px 0;
+	    text-decoration: none;
+	    border-radius: 5px;
+	    transition: background-color 0.3s ease;
+	}
+	.signup-btn {
+	    background-color: rgb(0, 0, 0);
+		font-size: 22px;
+		font-weight: bold;
+	}
+    .login-btn {
+        background-color: rgb(255, 128, 0);
+    }
+    .btn:hover, .signup-btn:hover, .login-btn:hover {
+        opacity: 0.85;
+    }
+    .line-divider {
+        width: 100%;
+        height: 2px;
+        background-color: red;
+    }
+    .plan-box {
+        width: calc(25% - 20px);
+        background-color: #333;
+        padding: 20px;
+        margin-bottom: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgb(255, 255, 255);
+        text-align: center;
+    }
+    .plan-box img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .plan-box h3 {
+        color: #ffcc00;
+        margin-top: 20px;
+    }
+    .plan-box p {
+        color: #ffffff;
+    }
+    .plan-box button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #ff6600;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .plan-box button:hover {
+        background-color: #e55a00;
+    }
+
+    @keyframes changeColor {
+        0% { color: #ff6600; }
+        50% { color: rgb(255, 255, 0); }
+        100% { color: rgb(174, 70, 0); }
+    }
+	
+	.caixa {
+	    width: 100%;
+		max-width: 1000px;
+		margin-top: 5px;
+	    padding: 10px;
+		border-radius: 15px;
+		margin-left: 90px;
+	    background-color: #f0f0f0;
+	    border: 1px solid #ccc;
+	    cursor: pointer;
+		color:rgb(255, 255, 255);
+	}
+	
+	.caixa-titulo {
+	    font-weight: bold;
+	    margin-bottom: 10px;
+		color:black
+	}
+	
+	.dialogo {
+	    display: none;
+		color:black;
+	    background-color: #fff;
+	    border: 1px solid rgb(172, 172, 172);
+		border-radius: 15px;
+	    padding: 10px;
+	}
+	
+	.arrow {
+	  border: solid black;
+	  border-width: 0 3px 3px 0;
+	  display: inline-block;
+	  padding: 3px;
+	}
+	
+	.right {
+	  transform: rotate(-45deg);
+	  -webkit-transform: rotate(-45deg);
+	}
+	
+	.left {
+	  transform: rotate(135deg);
+	  -webkit-transform: rotate(135deg);
+	}
+	
+	.up {
+	  transform: rotate(-135deg);
+	  -webkit-transform: rotate(-135deg);
+	}
+	
+	.down {
+	  transform: rotate(45deg);
+	  -webkit-transform: rotate(45deg);
+	}
+	
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Academia Zenith</h1>
+</div>
+
+<div class="line-divider"></div>
+
+<div class="nav-bar">
+    <div>
+        <a href="/">Home</a>
+        <a href="/faq">F.A.Q</a>
+        <a href="/modalidades">Modalidades</a>
+		<a href="/contato">Contato</a>
+    </div>
+    <div>
+        <a href="/login" class="login-btn">Área do aluno</a>
+		<a href="/formulario-cadastro" class="signup-btn">seja zenith <span class="yellow" style="color: yellow;">matricule-se</span></a>
+    </div>
+</div>
+
+<div class="main-image"></div>
+<br>
+
+<div class="content">
+	
+	<div class="caixa" onclick="toggleDialog('dialogo1');">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Fechei meu plano via site, o que faço agora?</div>
+	    <div class="dialogo" id="dialogo1">
+	        <p>	Caso o pagamento já tenha sido aprovado você já pode se dirigir a unidade contratada para a conclusão do cadastro e já começar a usar a academia.</p>
+	    </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo2')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> No primeiro dia de academia o que devo levar?</div>
+	    <div class="dialogo" id="dialogo2">
+	        <p>Leve seu documento com foto. Se for utilizar os armários, leve cadeado. Temos bebedouros e vale a pena, trazer uma squeeze e uma toalha de rosto. Indicamos usar roupas confortáveis. O tênis é obrigatório.	</p>
+			<p> </p>
+			<p>Assim você estará pronto para o seu primeiro dia na academia.</p>
+	    </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo3')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Quero utilizar um cartão que não é meu, Posso?</div>
+	    <div class="dialogo" id="dialogo3">
+	        <p>	Sim, convide o dono do cartão para ir com você até a academia e assinar um termo de autorização.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo4')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Cancelei e ainda veio mais uma cobrança. Por que?</div>
+	    <div class="dialogo" id="dialogo4">
+	        <p>Isso poderá acontecer. Conforme o contrato, você deverá solicitar com aviso prévio de 30 dias da data que deseja que seu cancelamento seja realizado. Se nesse tempo houver alguma recorrência, a mesma é devida. Lembrando que você poderá treinar até 30 dias após a data da sua última cobrança (vencimento).
+			Para que não haja cobranças posteriores ao cancelamento do plano, é necessário cancelar com antecedência mínima de 30 dias da data de cobrança da mensalidade, conforme estipulado em seu contrato, verifique a data de cobrança em sua fatura.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo5')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Parei de ir na academia. Por que estão me cobrando?</div>
+	    <div class="dialogo" id="dialogo5">
+	        <p>	Provalvemente seu plano ainda está ativo e disponível para sua utilização. As cobranças continuam ativas, até que você realize a solicitação de cancelamento de contrato.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo6')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Posso utilizar dos serviços da academia após agendar o meu cancelamento?</div>
+	    <div class="dialogo" id="dialogo6">
+	        <p>Sim! Você poderá frequentar até o dia da próxima cobrança (vencimento).</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo7')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Qual a idade mínima para a matrícula?</div>
+	    <div class="dialogo" id="dialogo7">
+	        <p>Para começar a treinar, é necessário ter mais de 14 anos. Para menores de 18 anos é necessário a presença de um responsável, maior de idade, portando os documentos dos dois.</p>
+	  		<p> </p>
+			<p>Crianças menores de 14 anos devem ir até a unidade com seu responsável conversar com o responsável técnico sobre a possibilidade.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo8')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Cancelei o plano um plano promocional antes do período de 3 meses, o que ocorre?</div>
+	    <div class="dialogo" id="dialogo8">
+			<p>	Se você cancelou um plano promocional antes do período de 3 meses, você perderá o benefício do desconto promocional. Conforme consta no contrato do aluno, ao cancelar antes desse prazo mínimo, será cobrada apenas a diferença do valor do plano adquirido durante o período que você utilizou, juntamente com quaisquer outros valores devidos no momento do cancelamento. Portanto, você não será penalizado com uma multa de cancelamento, mas perderá o direito ao desconto promocional e será cobrada a diferença correspondente ao valor do plano utilizado durante o período em que esteve matriculado.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo9')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> É aceito atestado médico para reposição de dias?</div>
+	    <div class="dialogo" id="dialogo9">
+	        <p>	Primeiro é necessário verificar se o seu plano tem direito a trancamento e quantos dias disponíveis. Caso seu plano tenha dias de trancamento, você deve entrar em contato e realizar o passo a passo. Basta clicar no chat que fica na página principal do site da academia.</p>
+			<br>
+			<p>	As ausências, faltas, afastamentos não comportarão compensações, reposição de dias contratados, prorrogação do termo de uso, nem transferências de mensalidade.</p>
+			<br>
+			<p>	Lembrando que a solicitação deve ser feita de imediato, não podendo ser utilizado de forma retroativa a data atual. Não será aceito por nós qualquer atestado médico para fins de reposição ou prorrogação do termo de uso.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo10')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Minha compra não foi aprovada, qual o motivo?</div>
+	    <div class="dialogo" id="dialogo10">
+	        <p>	A reprovação da compra é realizada pela operadora do cartão de crédito. Para identificar o motivo da reprovação, o titular deve entrar em contato diretamente com a operadora de cartão de crédito.</p>
+	  		<p> </p>
+			<p>	Muitas vezes isso ocorre pois por se tratar de uma compra online a operadora de cartão realiza o bloqueio automático. É só ligar e pedir para autorizar.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo11')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> Abre aos feriados?</div>
+	    <div class="dialogo" id="dialogo11">
+	        <p> A academia abre na grande maioria dos feriados e sempre vamos informar a respeito dos horários de funcionamento com antecedência, com um comunicado na recepção ou nas redes sociais.</p>
+	     </div>
+	</div>
+	
+	<div class="caixa" onclick="toggleDialog('dialogo12')">
+		<div class="caixa-titulo"> <i class="arrow right"></i> As unidades possuem vestiários?</div>
+	    <div class="dialogo" id="dialogo12">
+	        <p> Todas as unidades possuem vestiários com duchas e com armários rotativos para alunos em atividade. É obrigatório o uso de cadeado. Não nos responsabilizamos por objetos dentro dos armários rotativos. Sempre após o uso retire seus pertences e deixe o armário para que o próximo aluno possa usar.</p>
+	     </div>
+	</div>
+
+</div>
+<br>
+<div class="footer">
+    <p>© 2024 Academia Zenith. Todos os direitos reservados.</p>
+    <br>
+    <p>Desenvolvido por Matheus de Jesus</p>
+    <a href="https://github.com/NotKing22">Visualizar GitHub</a>
+</div>
+
+<script>
+	function toggleDialog(dialogoId) {
+	    var dialogo = document.getElementById(dialogoId);
+	    dialogo.style.display = (dialogo.style.display === 'block') ? 'none' : 'block';
+	}
+</script>
+
+</body>
+</html>

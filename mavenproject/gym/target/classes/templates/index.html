@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Academia Zenith</title>
+
+<link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_favicon_icon_130608.png" type="image/x-icon">
+
 <style>
     body {
         margin: 0;
@@ -49,6 +52,30 @@
         background-size: cover;
         background-position: center;
     }
+	
+	.promo {
+		border-radius: 20px;
+		width: 100%;
+		height: 100vh;
+		background-image: url(https://cdn.redealphafitness.com.br/des/001/img/000506.webp);
+		background-size: cover;
+		background-position: center;
+		margin-bottom: 50px;
+		margin-top: -130px;
+	}
+	
+	.contatozap {
+		border-radius: 20px;
+		width: 50%;
+		height: 40vh;
+		background-size: cover;
+		background-position: center;
+		margin-bottom: 50px;
+		margin-left: 310px;
+		cursor: pointer;
+		background-image: url(https://doseexata.com.br/wp-content/uploads/2022/05/contato-whatsapp.png);
+	}
+	
     .content {
         padding: 20px;
         text-align: center;
@@ -86,7 +113,9 @@
         transition: background-color 0.3s ease;
     }
     .signup-btn {
-        background-color: rgb(198, 0, 0);
+        background-color: rgb(0, 0, 0);
+		font-size: 22px;
+		font-weight: bold;
     }
     .login-btn {
         background-color: rgb(255, 128, 0);
@@ -115,7 +144,7 @@
 	}
 
     .plan-box img {
-        width: 100%;
+        width: 90%;
         border-radius: 5px;
     }
     .plan-box h3 {
@@ -146,6 +175,7 @@
         50% { color: rgb(255, 255, 0); }
         100% { color: rgb(174, 70, 0); }
     }
+	
 </style>
 </head>
 <body>
@@ -159,13 +189,14 @@
 <div class="nav-bar">
     <div>
 		<a href="/">Home</a>
-		<a href="/sobre">Sobre</a>
+		<a href="/faq">F.A.Q</a>
 		<a href="/modalidades">Modalidades</a>
+		<a style="cursor: pointer;" onclick="scrollToPlans();">Planos</a>
 		<a href="/contato">Contato</a>
     </div>
     <div>
         <a href="/login" class="login-btn">Área do aluno</a>
-        <a href="/formulario-cadastro" class="signup-btn">Matricule-se</a>
+        <a href="/formulario-cadastro" class="signup-btn">seja zenith <span class="yellow" style="color: yellow;">matricule-se</span></a>
     </div>
 </div>
 
@@ -177,11 +208,15 @@
         <p>Descubra um novo patamar de fitness com a Academia Zenith. Aqui, você encontrará uma combinação excepcional de tecnologia de ponta, instrutores altamente qualificados e uma comunidade apaixonada e motivadora. Nossa academia oferece uma variedade de equipamentos de última geração, projetados para atender às necessidades e objetivos individuais de cada membro. Seja qual for o seu nível de experiência ou objetivo de condicionamento físico, estamos aqui para ajudá-lo a alcançar e superar seus limites. Junte-se a nós na jornada rumo a uma vida mais saudável, ativa e vibrante na Academia Zenith.</p>
         <a href="#" class="btn">Saiba Mais</a>
     </div>
+	
+	<div class="promo"></div>
+	
     <div class="section">
         <h2>Contato</h2>
         <p>		
-		ntre em contato conosco hoje mesmo e dê o primeiro passo para a sua jornada fitness na Academia Zenith. Estamos ansiosos para recebê-lo em nossa família e ajudá-lo a alcançar seus objetivos de saúde e bem-estar. Não hesite em nos ligar, enviar um e-mail ou visitar pessoalmente nossa academia. Estamos aqui para apoiá-lo em cada etapa do caminho.</p>
+		Entre em contato conosco hoje mesmo e dê o primeiro passo para a sua jornada fitness na Academia Zenith. Estamos ansiosos para recebê-lo em nossa família e ajudá-lo a alcançar seus objetivos de saúde e bem-estar. Não hesite em nos ligar, enviar um e-mail ou visitar pessoalmente nossa academia. Estamos aqui para apoiá-lo em cada etapa do caminho.</p>
         <a href="/contato" class="btn">Entre em Contato</a>
+		<div class="contatozap"></div>
     </div>
     
     <div class="plans-container">
@@ -189,29 +224,33 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9QytBpx18YJ_Ac7RLKJlMasWt5_rOVLxXDkFFpuG9BQ&s" alt="Plano Mensal">
             <h3>Mensal</h3>
 			<p>Obtenha flexibilidade com nosso plano mensal. Ideal para quem deseja experimentar nossa academia por um curto período ou precisa de um compromisso de curto prazo.</p>
-			<strong><p>R$ 59,90</p></strong>
-			<a href="/formulario-cadastro" class="button">Assinar plano</a>
+			<br>
+			<strong><p style="font-size: 30px;">R$ 59,90</p></strong>
+			<a href="/login" class="button">Assinar plano</a>
         </div>
         <div class="plan-box">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPyKmXulnKgfdf-6Ghgs4Ob_lJq5QRT2MJns0NdnJWVg&s" alt="Plano Trimestral">
             <h3>Trimestral</h3>
 			<p>Comprometa-se com sua jornada de fitness com nosso plano trimestral. Aproveite os benefícios de um compromisso um pouco mais longo e economize ao mesmo tempo.</p>
-			<strong><p>R$ 159,99</p></strong>
-			<a href="/formulario-cadastro" class="button">Assinar plano</a>
+			<strong><p style="text-decoration: line-through; color: gray;">de R$ 180,00 por</p></strong>
+			<strong><p style="font-size: 30px;">R$ 119,99 </p></strong>
+			<a href="/login" class="button">Assinar plano</a>
         </div>
         <div class="plan-box">
             <img src="https://img.freepik.com/vetores-premium/coroa-de-pixel-art-para-ativos-de-jogo_735839-172.jpg" alt="Plano Semestral">
             <h3>Semestral</h3>
 			<p>Maximize seus resultados com nosso plano semestral. Aproveite uma economia ainda maior ao comprometer-se com seis meses de treinamento regular, economizando ainda mais!.</p>
-			<strong><p>R$ 319,99</p></strong>
-			<a href="/formulario-cadastro" class="button">Assinar plano</a>
+			<strong><p style="text-decoration: line-through; color: gray;">de R$ 360,00 por</p></strong>
+			<strong><p style="font-size: 30px;">R$ 219,99</p></strong>
+			<a href="/login" class="button">Assinar plano</a>
         </div>
         <div class="plan-box">
             <img src="https://static.vecteezy.com/ti/vetor-gratis/p3/5212727-vector-pixel-art-coroa-pixel-art-golden-coroa-pixel-art-royal-king-hat-vector-illustration-vetor.jpg" alt="Plano Anual">
             <h3>Anual</h3>
 			<p>Transforme seu estilo de vida com nosso plano anual. Economize ao máximo e aproveite todos os benefícios de longo prazo que a nossa academia tem a oferecer.</p>
-            <strong><p>R$ 679,99</p> </strong>
-			<a href="/formulario-cadastro" class="button">Assinar plano</a>
+			<strong><p style="text-decoration: line-through; color: gray;">de R$ 720,00 por</p></strong>
+			<strong><p style="font-size: 30px;">R$ 419,99</p> </strong>
+			<a href="/login" class="button">Assinar plano</a>
         </div>
     </div>
 </div>
@@ -222,6 +261,20 @@
 	<p>Desenvolvido por Matheus de Jesus</p>
 	<a href="https://github.com/NotKing22">Visualizar GitHub</a>
 </div>
+
+<script>
+	
+	function scrollToPlans() {
+	    var plansContainer = document.querySelector('.plans-container');
+	    if (plansContainer) {
+	        plansContainer.scrollIntoView({
+	            behavior: 'smooth', //rola suave
+	            block: 'start' //para no planscontainer
+	        });
+	    }
+	}
+	
+</script>
 
 </body>
 </html>
